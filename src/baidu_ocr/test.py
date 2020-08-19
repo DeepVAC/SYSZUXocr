@@ -1,6 +1,7 @@
 import sys
 sys.path.append('/your deepvac_path/lib/')
 from syszux_report import OcrReport
+from syszux_log import LOG
 from aip import AipOcr
 import time
 import os
@@ -17,7 +18,10 @@ class BaiduOcrTest:
         self.labels = {}
         with open(self.test_file, 'r', encoding='utf-8') as f:
             for line in f.readlines():
-                self.labels[line.split(' ')[0]] = line.split(' ')[-1].strip()
+                line = line.strip()
+                sample = line.split()
+                assert len(sample)==2, '{} file format error'.format(self.test_file)
+                self.labels[sample[0]] = sample[1]
 
     """ 读取图片 """
     def get_file_content(self, filePath):
@@ -36,12 +40,12 @@ class BaiduOcrTest:
             pred = ''
             if 'error_code' in res.keys():
                 ocr_report.add(self.labels[img_name],pred)
-                print("unknown error.")
+                LOG.logI('error code:{}'.format(res))
                 continue
             for dic in res['words_result']:
                 pred += dic['words'].strip()
             ocr_report.add(self.labels[img_name],pred)
-            print(img_name,':',res)
+            LOG.logI('{}: {}'.format(img_name,res))
             time.sleep(1)
         ocr_report()
 
