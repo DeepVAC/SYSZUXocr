@@ -1,4 +1,4 @@
-# 使用百度ocr评估在SYSZUXocr验收集上的准确度
+# 使用百度通用ocr评估在SYSZUXocr验收集上的准确度
 
 ## 环境
 
@@ -52,8 +52,20 @@ ocr_on_film
 
 ocr_on_social
 
-...
+|dataset|total|duration|accuracy|precision|recall|miss|error|
+|--|--|--|--|--|--|--|--|
+|ocr_on_social|100|138.302|0.84|0.8484848484848485|0.9882352941176471|0.01|0.16|
+
+|dataset|total_per_char|correct_per_char|accuracy_per_char|
+|--|--|--|--|
+|ocr_on_social|585|555|0.9487179487179487|
 
 ocr_on_plate
 
-...
+|dataset|total|duration|accuracy|precision|recall|miss|error|
+|--|--|--|--|--|--|--|--|
+|ocr_on_plate|100|135.053|0.43|0.4479166666666667|0.9148936170212766|0.04|0.57|
+
+|dataset|total_per_char|correct_per_char|accuracy_per_char|
+|--|--|--|--|
+|ocr_on_plate|746|613|0.82171581769437|
